@@ -1,4 +1,4 @@
-#Scrypt.NET
+#Scrypt.NETCore
 
 [![NuGet](https://img.shields.io/nuget/v/Scrypt.NETCore.svg?maxAge=2592000)](https://www.nuget.org/packages/Scrypt.NETCore/)
 
