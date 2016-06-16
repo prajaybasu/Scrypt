@@ -514,23 +514,25 @@ namespace Scrypt
 
                 mac.Initialize();
 
-                var incrementalHasher = IncrementalHash.CreateHMAC(HashAlgorithmName.SHA256, mac.Key);
-                incrementalHasher.AppendData(saltBuffer, 0, saltBuffer.Length);
-                Buffer.BlockCopy(incrementalHasher.GetHashAndReset(), 0, U, 0, U.Length);
-                Buffer.BlockCopy(U, 0, T, 0, 32);
-
-                for (long j = 1; j < iterationCount; j++)
+                using (var incrementalHasher = IncrementalHash.CreateHMAC(HashAlgorithmName.SHA256, mac.Key))
                 {
-                    incrementalHasher.AppendData(U, 0, U.Length);
+                    incrementalHasher.AppendData(saltBuffer, 0, saltBuffer.Length);
                     Buffer.BlockCopy(incrementalHasher.GetHashAndReset(), 0, U, 0, U.Length);
+                    Buffer.BlockCopy(U, 0, T, 0, 32);
 
-                    for (int k = 0; k < 32; k++)
+                    for (long j = 1; j < iterationCount; j++)
                     {
-                        T[k] ^= U[k];
+                        incrementalHasher.AppendData(U, 0, U.Length);
+                        Buffer.BlockCopy(incrementalHasher.GetHashAndReset(), 0, U, 0, U.Length);
+
+                        for (int k = 0; k < 32; k++)
+                        {
+                            T[k] ^= U[k];
+                        }
                     }
                 }
-
-                Buffer.BlockCopy(T, 0, derivedKey, (i - 1) * 32, (i == blockCount ? r : 32));
+                    Buffer.BlockCopy(T, 0, derivedKey, (i - 1) * 32, (i == blockCount ? r : 32));
+                
             }
         }
 
