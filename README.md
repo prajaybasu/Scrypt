@@ -22,7 +22,7 @@ bool areEquals = encoder.Compare("mypassword", hashedPassword);
 ```
 
 ##Install
-Install via NuGet: Install-Package Scrypt.NET
+Install via NuGet: Install-Package Scrypt.NETCore
 
 ##Feedback
 Please use the [Issues](https://github.com/prajaybasu/scrypt/issues) for feature requests and troubleshooting usage.
