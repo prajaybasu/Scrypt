@@ -9,6 +9,6 @@
     
   },
   "frameworks": {
-    "netcore50": { }
+    "net46": { }
   }
 }
