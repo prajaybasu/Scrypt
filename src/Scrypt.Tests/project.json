@@ -1,0 +1,14 @@
+﻿{
+  "testRunner": "xunit",
+  "supports": { },
+  "dependencies": {
+    "NETStandard.Library": "1.0.0-rc2-23910",
+    "xunit": "2.2.0-beta1-build3239",
+    "dotnet-test-xunit": "1.0.0-rc2-build10025",
+    "Scrypt.NETCore": "1.0.0.0"
+    
+  },
+  "frameworks": {
+    "netcore50": { }
+  }
+}

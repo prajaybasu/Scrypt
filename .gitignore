@@ -1,5 +1,7 @@
 [Oo]bj/
 [Bb]in/
+pkg/
+*.lock.json
 TestResults/
 .nuget/
 _ReSharper.*/
@@ -28,3 +30,5 @@ nuget.exe
 #*.sln
 #*.csproj
 #*.kproj
+/.vs/config
+/src/Scrypt.Tests/Scrypt.Tests.nuget.props

@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.25302.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7A73E3DB-F7EF-4F58-8B10-56079BFE0460}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrypt", "src\Scrypt\Scrypt.csproj", "{F27E95A9-FC05-43D0-9801-00C496B497EA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{44CE9E30-295A-4FC6-A301-2D233113274C}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrypt.Tests", "src\Scrypt.Tests\Scrypt.Tests.csproj", "{4AB836C3-5041-470C-ABE8-04C475952017}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrypt.Tests", "src\Scrypt.Tests\Scrypt.Tests.csproj", "{0EAA6C80-9F36-4497-A877-860935AB3AD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,21 +31,25 @@ Global
 		{F27E95A9-FC05-43D0-9801-00C496B497EA}.Release|x64.Build.0 = Release|Any CPU
 		{F27E95A9-FC05-43D0-9801-00C496B497EA}.Release|x86.ActiveCfg = Release|Any CPU
 		{F27E95A9-FC05-43D0-9801-00C496B497EA}.Release|x86.Build.0 = Release|Any CPU
-		{4AB836C3-5041-470C-ABE8-04C475952017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AB836C3-5041-470C-ABE8-04C475952017}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AB836C3-5041-470C-ABE8-04C475952017}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4AB836C3-5041-470C-ABE8-04C475952017}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4AB836C3-5041-470C-ABE8-04C475952017}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AB836C3-5041-470C-ABE8-04C475952017}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4AB836C3-5041-470C-ABE8-04C475952017}.Release|x64.ActiveCfg = Release|Any CPU
-		{4AB836C3-5041-470C-ABE8-04C475952017}.Release|x86.ActiveCfg = Release|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Debug|x64.Build.0 = Debug|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Debug|x86.Build.0 = Debug|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Release|x64.ActiveCfg = Release|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Release|x64.Build.0 = Release|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Release|x86.ActiveCfg = Release|Any CPU
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F27E95A9-FC05-43D0-9801-00C496B497EA} = {7A73E3DB-F7EF-4F58-8B10-56079BFE0460}
-		{4AB836C3-5041-470C-ABE8-04C475952017} = {7A73E3DB-F7EF-4F58-8B10-56079BFE0460}
+		{0EAA6C80-9F36-4497-A877-860935AB3AD0} = {7A73E3DB-F7EF-4F58-8B10-56079BFE0460}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = src\Scrypt\Scrypt.csproj

@@ -33,7 +33,7 @@ namespace Scrypt
         /// <summary>
         /// Default salt generator.
         /// </summary>
-        private static RandomNumberGenerator DefaultSaltGenereator = new RNGCryptoServiceProvider();
+        private static RandomNumberGenerator DefaultSaltGenereator = RandomNumberGenerator.Create();
 
         /// <summary>
         /// Size of salt in bytes.
@@ -75,12 +75,12 @@ namespace Scrypt
         {
             if (blockSize < 1)
             {
-                throw new ArgumentOutOfRangeException("blockSize", "BlockSize must be equal or greater than 1.");
+                throw new ArgumentOutOfRangeException(nameof(blockSize), "BlockSize must be equal or greater than 1.");
             }
 
             if (threadCount < 1)
             {
-                throw new ArgumentOutOfRangeException("threadCount", "ThreadCount must be equal or greater than 1.");
+                throw new ArgumentOutOfRangeException(nameof(threadCount), "ThreadCount must be equal or greater than 1.");
             }
 
             _iterationCount = iterationCount;
@@ -100,12 +100,12 @@ namespace Scrypt
         {
             if (string.IsNullOrEmpty(password))
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
             }
 
             if (string.IsNullOrEmpty(hashedPassword))
             {
-                throw new ArgumentNullException("hashedPassword");
+                throw new ArgumentNullException(nameof(hashedPassword));
             }
 
             int iterationCount;
@@ -125,7 +125,7 @@ namespace Scrypt
         {
             if (string.IsNullOrEmpty(password))
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
             }
 
             var saltBytes = new byte[SaltLength];
@@ -168,7 +168,7 @@ namespace Scrypt
 
             if (parts.Length != 5 || parts[1] != "s0")
             {
-                throw new ArgumentException("Invalid hashed password", "hashedPassword");
+                throw new ArgumentException("Invalid hashed password", nameof(hashedPassword));
             }
 
             var config = Convert.ToInt64(parts[2], 16);
@@ -464,7 +464,6 @@ namespace Scrypt
             var buf = new byte[32];
 
             var mac = new HMACSHA256(password);
-
             /* 1: (B_0 ... B_{p-1}) <-- PBKDF2(P, S, 1, p * MFLen) */
             PBKDF2_SHA256(mac, password, salt, salt.Length, 1, Ba, p * 128 * r);
 
@@ -488,6 +487,7 @@ namespace Scrypt
 
         /// <summary>
         /// Compute PBKDF2 using HMAC-SHA256 as the PRF, and write the output to derivedKey.
+        /// TODO : Use corefx implementation once SHA256 is implemented. See https://github.com/dotnet/corefx/issues/9438
         /// </summary>
         private static void PBKDF2_SHA256(HMACSHA256 mac, byte[] password, byte[] salt, int saltLength, long iterationCount, byte[] derivedKey, int derivedKeyLength)
         {
@@ -513,14 +513,16 @@ namespace Scrypt
                 saltBuffer[saltLength + 3] = (byte)(i);
 
                 mac.Initialize();
-                mac.TransformFinalBlock(saltBuffer, 0, saltBuffer.Length);
-                Buffer.BlockCopy(mac.Hash, 0, U, 0, U.Length);
+
+                var xx = IncrementalHash.CreateHMAC(HashAlgorithmName.SHA256, mac.Key);
+                xx.AppendData(saltBuffer, 0, saltBuffer.Length);
+                Buffer.BlockCopy(xx.GetHashAndReset(), 0, U, 0, U.Length);
                 Buffer.BlockCopy(U, 0, T, 0, 32);
 
                 for (long j = 1; j < iterationCount; j++)
                 {
-                    mac.TransformFinalBlock(U, 0, U.Length);
-                    Buffer.BlockCopy(mac.Hash, 0, U, 0, U.Length);
+                    xx.AppendData(U, 0, U.Length);
+                    Buffer.BlockCopy(xx.GetHashAndReset(), 0, U, 0, U.Length);
 
                     for (int k = 0; k < 32; k++)
                     {
@@ -531,7 +533,7 @@ namespace Scrypt
                 Buffer.BlockCopy(T, 0, derivedKey, (i - 1) * 32, (i == blockCount ? r : 32));
             }
         }
-        
+
         /// <summary>
         /// Checks if two strings are equal. Compares every char to prevent timing attacks.
         /// </summary>
@@ -540,15 +542,17 @@ namespace Scrypt
         /// <returns>True if both strings are equal</returns>
         private static bool SafeEquals(string a, string b)
         {
-            if (a.Length != b.Length) {
+            if (a.Length != b.Length)
+            {
                 return false;
             }
             uint diff = 0;
- 
-            for (int i = 0; i < a.Length; i++) {
+
+            for (int i = 0; i < a.Length; i++)
+            {
                 diff |= (uint)a[i] ^ (uint)b[i];
             }
- 
+
             return diff == 0;
         }
 
