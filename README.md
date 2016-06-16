@@ -1,12 +1,10 @@
 #Scrypt.NET
-[![Build Status](https://travis-ci.org/viniciuschiele/Scrypt.svg)](https://travis-ci.org/viniciuschiele/Scrypt)
+
+[![NuGet](https://img.shields.io/nuget/v/Scrypt.NETCore.svg?maxAge=2592000)](https://www.nuget.org/packages/Scrypt.NETCore/)
 
 scrypt is a password hash algorithm created by [Tarsnap](http://www.tarsnap.com/scrypt.html) in 2012 that allow us to protect passwords stored on databases against brute force attacks.
 
-This .NET implementation of scrypt is a port of [original implementation in C](http://www.tarsnap.com/scrypt.html), which generates the same hash as the original implementation does. This implementation is fast but not as fast as original one because the original one is written in C and it uses SIMD instructions.
-
-If you would like to know further about hashing algorithms and how to protect passwords I really recommend you to read that article [Password Hashing](https://crackstation.net/hashing-security.htm).
-
+This is netstandard1.3 port of https://github.com/viniciuschiele/Scrypt (with minor changes)
 ##Examples
 Generating a new hash for a password:
 ```csharp
@@ -23,10 +21,8 @@ ScryptEncoder encoder = new ScryptEncoder();
 bool areEquals = encoder.Compare("mypassword", hashedPassword);
 ```
 
-It works perfectly in Linux and OSX using [mono](http://www.mono-project.com), I'm not sure about mobile phones but I believe that it should work as well. 
-
 ##Install
 Install via NuGet: Install-Package Scrypt.NET
 
 ##Feedback
-Please use the [Issues](https://github.com/viniciuschiele/scrypt/issues) for feature requests and troubleshooting usage.
+Please use the [Issues](https://github.com/prajaybasu/scrypt/issues) for feature requests and troubleshooting usage.
